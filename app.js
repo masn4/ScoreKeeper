@@ -1,3 +1,13 @@
+// const p1 = {
+//   score: 0,
+//   button: document.querySelector("#p1Butt"),
+// };
+
+// const p2 = {
+//   score: 0,
+//   button: document.querySelector("#p2Butt"),
+// };
+
 function addScore(playerNum) {
   if (playerNum === 1) {
     p1Add += 1;
@@ -31,6 +41,23 @@ function checkWinner() {
     console.log("ERORRR");
   }
 }
+
+function resetGame() {
+  p1Add = 0;
+  p2Add = 0;
+  p1Score.textContent = p1Add;
+  p2Score.textContent = p2Add;
+  p1Score.classList.remove("has-text-success", "has-text-danger");
+  p2Score.classList.remove("has-text-success", "has-text-danger");
+  gameIsOver = false;
+  p1Butt.disabled = false;
+  p2Butt.disabled = false;
+}
+
+function roundsNumber() {
+  winningScore = parseInt(e.target.value);
+}
+
 const p1Butt = document.querySelector("#p1Butt");
 const p2Butt = document.querySelector("#p2Butt");
 const resetButt = document.querySelector("#resetButt");
@@ -41,6 +68,10 @@ let p1Add = 0;
 let p2Add = 0;
 let winningScore = 0;
 
+playerSelect.addEventListener("change", function (e) {
+  roundsNumber();
+});
+
 p1Butt.addEventListener("click", function () {
   addScore(1);
 });
@@ -48,18 +79,5 @@ p2Butt.addEventListener("click", function () {
   addScore(2);
 });
 resetButt.addEventListener("click", function () {
-  p1Add = 0;
-  p2Add = 0;
-  p1Score.textContent = p1Add;
-  p2Score.textContent = p2Add;
-  p1Score.classList.remove("has-text-success", "has-text-danger");
-  p2Score.classList.remove("has-text-success", "has-text-danger");
-  gameIsOver = false;
-  p1Butt.disabled = false;
-  p2Butt.disabled = false;
-});
-playerSelect.addEventListener("change", function (e) {
-  console.log(winningScore);
-  winningScore = parseInt(e.target.value);
-  console.log(winningScore);
+  resetGame();
 });
